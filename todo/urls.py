@@ -21,13 +21,13 @@ from project.views import ProjectModelViewSet, TodoModelViewSet
 from userapp.views import UserListAPIView, UserRetrieveAPIView
 
 router = DefaultRouter()
-router.register('project', ProjectModelViewSet)
-router.register('todo', TodoModelViewSet)
+router.register('projects', ProjectModelViewSet)
+router.register('todos', TodoModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('api/user/', UserListAPIView.as_view()),
-    path('api/user/detail/<int:pk>/', UserRetrieveAPIView.as_view()),
+    path('api/users/', UserListAPIView.as_view()),
+    path('api/users/detail/<int:pk>', UserRetrieveAPIView.as_view()),
 ]

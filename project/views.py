@@ -15,7 +15,7 @@ from userapp.serializers import ProjectModelSerializer, TodoModelSerializer
 class ProjectModelViewSet(ModelViewSet):
    queryset = Project.objects.all()
    serializer_class = ProjectModelSerializer
-   pagination_class = ProjectSetPagination
+   # pagination_class = ProjectSetPagination
    filterset_class = ProjectFilter
 
 
@@ -23,11 +23,11 @@ class ProjectModelViewSet(ModelViewSet):
 class TodoModelViewSet(ModelViewSet):
    queryset = Todo.objects.all()
    serializer_class = TodoModelSerializer
-   pagination_class = TodoSetPagination
+   # pagination_class = TodoSetPagination
    filterset_class = TodoFilter
 
    def destroy(self, request, pk=None):
       self.object = self.get_object()
       self.object.is_active = False
       self.object.save()
-      return HttpResponseRedirect(redirect_to='http://127.0.0.1:8000/api/todo/')
+      return HttpResponseRedirect(redirect_to='http://127.0.0.1:8000/api/todos/')

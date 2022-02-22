@@ -1,67 +1,95 @@
 import React from 'react';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
-
 import Footer from './components/Footer.js'
 import Navbar from './components/Menu.js'
 import UserList from './components/User.js'
+import {ProjectList, ProjectDetail} from './components/Project.js'
+import TodoList from './components/Todos.js'
 import axios from 'axios'
 
 
+const DOMAIN = 'http://127.0.0.1:8000/api/'
+const get_url = (url) => `${DOMAIN}${url}`
+
+
 class App extends React.Component {
-
-   constructor(props) {
-       super(props)
-       this.state = {
-           navbarItems: [
+    constructor(props) {
+        super(props)
+        this.state = {
+            navbarItems: [
                 {name: 'Users', href: '/'},
+                {name: 'Projects', href: '/projects'},
+                {name: 'TODOs', href: '/todos'},
             ],
-           'users': []
-       }
-   }
+            users: [],
+            projects: [],
+            project: {},
+            todos: []
+        }
+    }
 
-   componentDidMount() {
-       // const users = [
-       //     {
-       //         'first_name': 'Фёдор',
-       //         'last_name': 'Достоевский',
-       //         'username':'sdads'
-       //     },
-       //     {
-       //         'first_name': 'Александр',
-       //         'last_name': 'Грин',
-       //         'username':'ssdasdas'
-       //     },
-       // ]
+    getProject(id) {
+
+        axios.get(get_url(`projects/${id}/`))
+            .then(response => {
+                this.setState({project: response.data})
+            }).catch(error => console.log(error))
+    }
+
+    componentDidMount() {
+        axios.get(get_url('users/'))
+            .then(response => {
+                this.setState({users: response.data})
+            }).catch(error => console.log(error))
 
 
-       axios.get('http://127.0.0.1:8000/api/user/')
-       .then(response => {
-           const users = response.data
-               this.setState(
-               {
-                   'users': users
-               }
-           )
-       }).catch(error => console.log(error))
+        axios.get(get_url('projects/'))
+            .then(response => {
+                this.setState({projects: response.data})
+            }).catch(error => console.log(error))
 
-   }
+        axios.get(get_url('todos/'))
+            .then(response => {
+                this.setState({todos: response.data})
+            }).catch(error => console.log(error))
+    }
+
 
     render() {
         return (
-            <div>
+            <Router>
                 <header>
                     <Navbar navbarItems={this.state.navbarItems}/>
                 </header>
-                <main role="main" class="flex-shrink-0">
+                <main role="main" className="flex-shrink-0">
                     <div className="container">
-                        <UserList users={this.state.users}/>
+                        <Switch>
+                            <Route exact path='/'>
+                                <UserList users={this.state.users}/>
+                            </Route>
+                            <Route exact path='/projects'>
+                                <ProjectList projects={this.state.projects}/>
+                            </Route>
+                            <Route exact path='/todos'>
+                                <TodoList items={this.state.todos}/>
+                            </Route>
+                            <Route exact path="/project/:id">
+                                <ProjectDetail getProject={(id) => this.getProject(id)}
+                                                                                item={this.state.project}/>
+                            </Route>
+                        </Switch>
                     </div>
                 </main>
                 <Footer/>
-            </div>
+            </Router>
 
 
         )
@@ -70,4 +98,3 @@ class App extends React.Component {
 
 
 export default App;
-

@@ -7,7 +7,7 @@ from todo import settings
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64,  unique=True)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
     repository = models.URLField(blank=True)
 
@@ -17,5 +17,5 @@ class Todo(models.Model):
     text = models.TextField()
     create_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="user")
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.PROTECT)
     is_active = models.BooleanField(default=True)
