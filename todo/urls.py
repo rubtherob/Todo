@@ -30,4 +30,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/users/', UserListAPIView.as_view()),
     path('api/users/detail/<int:pk>', UserRetrieveAPIView.as_view()),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
 ]
