@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'project',
     'django_filters',
     'rest_framework.authtoken',
-    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -140,9 +139,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
-}
 
 
 
@@ -155,8 +151,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 
 

@@ -3,6 +3,7 @@ import {
     Link
 } from "react-router-dom";
 
+
 function NavbarItem({name, href}) {
     return (
         <li className="nav-item active">
