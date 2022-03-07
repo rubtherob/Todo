@@ -37,7 +37,7 @@ class App extends React.Component {
             projects: [],
             project: {},
             todos: [],
-            'token': '',
+            token: '',
         }
     }
     load_data(){
@@ -87,6 +87,7 @@ class App extends React.Component {
             username: username,
             password: password
         }).then(response => {
+            console.log(response.data)
             this.set_token(response.data['token'])
         }).catch(error => console.log(error))
     }

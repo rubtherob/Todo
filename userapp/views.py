@@ -6,13 +6,9 @@ from .models import User
 from .serializers import UserModelSerializer
 
 
-class UserListAPIView(ListAPIView):
+class UserListViewSet(ModelViewSet):
    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
    queryset = User.objects.all()
    serializer_class = UserModelSerializer
 
 
-class UserRetrieveAPIView(RetrieveAPIView):
-   renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
-   queryset = User.objects.all()
-   serializer_class = UserModelSerializer

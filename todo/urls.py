@@ -19,17 +19,16 @@ from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
 from project.views import ProjectModelViewSet, TodoModelViewSet
-from userapp.views import UserListAPIView, UserRetrieveAPIView
+from userapp.views import UserListViewSet
 
 router = DefaultRouter()
 router.register('projects', ProjectModelViewSet)
 router.register('todos', TodoModelViewSet)
+router.register('users', UserListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('api/users/', UserListAPIView.as_view()),
-    path('api/users/detail/<int:pk>', UserRetrieveAPIView.as_view()),
     path('api-token-auth/', obtain_auth_token),
 ]

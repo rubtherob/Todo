@@ -19,7 +19,7 @@ class ProjectModelViewSet(ModelViewSet):
    serializer_class = ProjectModelSerializer
    # pagination_class = ProjectSetPagination
    filterset_class = ProjectFilter
-   permission_classes = [IsAuthenticated]
+   # permission_classes = [IsAuthenticated]
 
 
 class TodoModelViewSet(ModelViewSet):
