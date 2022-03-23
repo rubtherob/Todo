@@ -2,11 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import permissions
-from rest_framework.generics import RetrieveAPIView, UpdateAPIView
-from rest_framework.mixins import ListModelMixin, DestroyModelMixin
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from project.filter import ProjectFilter, TodoFilter
 from project.models import Project, Todo
