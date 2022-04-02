@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 
-const ProjectListItem = ({item}) => {
+const ProjectListItem = ({item, deleteProjects}) => {
     let link_to = `/project/${item.id}`
     return (
         <tr>
@@ -14,11 +14,12 @@ const ProjectListItem = ({item}) => {
             <td>{item.name}</td>
             <td>{item.repository}</td>
             <td><Link to={link_to}>Detail</Link></td>
+            <td><button onClick={()=>deleteProjects(item.id)} type='button'>Delete</button></td>
         </tr>
     )
 }
 
-const ProjectList = ({projects}) => {
+const ProjectList = ({projects, deleteProjects}) => {
     return (
         <table className="table">
             <tr>
@@ -26,8 +27,9 @@ const ProjectList = ({projects}) => {
                 <th>Name</th>
                 <th>Repository</th>
                 <th></th>
+                <th></th>
             </tr>
-            {projects.map((item) => <ProjectListItem item={item} />)}
+            {projects.map((item) => <ProjectListItem item={item} deleteProjects={deleteProjects}/>)}
         </table>
     )
 }

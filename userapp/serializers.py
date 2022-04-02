@@ -8,14 +8,14 @@ class UserModelSerializer(ModelSerializer):
 
    class Meta:
        model = User
-       fields = ('username', 'first_name', 'last_name', 'email')
+       fields = ('username', 'first_name', 'last_name', 'email', 'id')
 
 
 class UserBaseModelSerializer(ModelSerializer):
 
    class Meta:
        model = User
-       fields = ('username', 'first_name', 'last_name', 'email', 'is_staff', 'is_superuser')
+       fields = ('username', 'first_name', 'last_name', 'email', 'is_staff', 'is_superuser', 'id')
 
 class ProjectModelSerializer(ModelSerializer):
 
